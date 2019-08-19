@@ -2,7 +2,7 @@
 
 ROOT_DIR="$(cd "$(dirname $0)" && pwd)"/../..
 
-DESCRIPTION_EXTENSION_REPOSITORY=https://github.com/smarty-kiki/frame_description_extension.git
+DESCRIPTION_EXTENSION_REPOSITORY=https://github.com/smarty-kiki/frame_description_extension_layui.git
 DESCRIPTION_EXTENSION_DIR=$ROOT_DIR/command/description_extension
 
 add_gitignore()
