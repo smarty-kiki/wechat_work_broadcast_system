@@ -110,7 +110,7 @@ $table_render_infos[] = [
                       layer.close(i);
                       layer.msg(res.msg);
                   } else {
-                      table.reload('good-table');
+                      table.reload('{{ $entity_name }}-table');
                       layer.close(i);
                   }
               }, 'json');
