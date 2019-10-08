@@ -2,7 +2,7 @@
 
 sed_name()
 {
-    cat $1 | sed -e "s/mvc_frame/$2/g" > $1.new && mv $1.new $1
+    cat $1 | sed -e "s/layui_mvc_frame/$2/g" > $1.new && mv $1.new $1
 }
 
 if [ ! -n "$1" ] ;then
@@ -12,8 +12,8 @@ fi
 
 ROOT_DIR="$(cd "$(dirname $0)" && pwd)"/../../
 
-mv $ROOT_DIR/project/config/development/nginx/mvc_frame.conf $ROOT_DIR/project/config/development/nginx/$1.conf
-mv $ROOT_DIR/project/config/production/nginx/mvc_frame.conf $ROOT_DIR/project/config/production/nginx/$1.conf
+mv $ROOT_DIR/project/config/development/nginx/layui_mvc_frame.conf $ROOT_DIR/project/config/development/nginx/$1.conf
+mv $ROOT_DIR/project/config/production/nginx/layui_mvc_frame.conf $ROOT_DIR/project/config/production/nginx/$1.conf
 
 sed_name $ROOT_DIR/project/config/development/nginx/$1.conf $1
 sed_name $ROOT_DIR/project/config/development/supervisor/queue_worker.conf $1
