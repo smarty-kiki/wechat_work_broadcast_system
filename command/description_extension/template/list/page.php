@@ -15,7 +15,7 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header"></div>
+          <div class="layui-card-header">{{ $entity_name::$entity_description }}</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="{{ $entity_name }}-table" lay-filter="{{ $entity_name }}-table"></table>
 

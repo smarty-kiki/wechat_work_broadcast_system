@@ -5,15 +5,10 @@ if_get('/', function ()
     return render('index/index', [
         'tree_infos' => [
             [
-                'name' => '模块',
+                'name' => '表单式管理',
                 'key'  => 'module',
                 'icon_class' => 'layui-icon-component',
                 'children' => [
-                    [
-                        'name' => '页面',
-                        'key'  => 'page',
-                        'href'  => '/pages',
-                    ],
                 ],
             ]
         ],
