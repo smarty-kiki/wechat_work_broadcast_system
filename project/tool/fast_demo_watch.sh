@@ -5,7 +5,7 @@ LOCK_FILE=/tmp/description_watch.lock
 env=development
 
 inotifywait -qm -e CREATE -e MODIFY -e DELETE $PROJECT_PATH/domain/description/ | while read -r directory event filename;do
-if [[ $filename == *.yml ]]
+if [ "${filename##*.}" = "yml" ]
 then
     if [ ! -f $LOCK_FILE ]
     then
@@ -28,7 +28,7 @@ then
             grep -v "'$entity_name'" $PROJECT_PATH/controller/index.php > /tmp/controller_index.php
             mv /tmp/controller_index.php $PROJECT_PATH/controller/index.php
 
-            if [ "$event" == "CREATE" ];then
+            if [ "$event" = "CREATE" ];then
                 echo $filename $event
 
                 ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php entity:make-from-description --entity_name=$entity_name
@@ -43,7 +43,7 @@ then
                 /bin/sed -i "/children/a\\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\ 'name'\ =>\ \'$menu_name管理\',\ \'key\'\ =>\ \'$entity_name\',\ \'href\'\ =>\ \'$list_url\',\ ]," $PROJECT_PATH/controller/index.php
             fi
 
-            if [ "$event" == "MODIFY" ];then
+            if [ "$event" = "MODIFY" ];then
                 echo $filename $event
 
                 ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php entity:make-from-description --entity_name=$entity_name
@@ -58,7 +58,7 @@ then
                 /bin/sed -i "/children/a\\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\ 'name'\ =>\ \'$menu_name管理\',\ \'key\'\ =>\ \'$entity_name\',\ \'href\'\ =>\ \'$list_url\',\ ]," $PROJECT_PATH/controller/index.php
             fi
 
-            if [ "$event" == "DELETE" ];then
+            if [ "$event" = "DELETE" ];then
                 echo $filename $event
 
                 /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
