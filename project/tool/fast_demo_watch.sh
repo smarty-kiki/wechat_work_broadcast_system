@@ -4,21 +4,28 @@ PROJECT_PATH="$(cd "$(dirname $0)" && pwd)"/../..
 LOCK_FILE=/tmp/description_watch.lock
 env=development
 
-inotifywait -qm -e CREATE -e MODIFY -e DELETE $PROJECT_PATH/domain/description/ | while read -r directory event filename;do
-if [ "${filename##*.}" = "yml" ]
+inotifywait -qm -e CREATE -e MODIFY -e DELETE $PROJECT_PATH/domain/description/ | while read -r directory event filenames;do
+if [ "${filenames##*.}" = "yml" ]
 then
     if [ ! -f $LOCK_FILE ]
     then
         echo $$ > $LOCK_FILE
         (
+        if [ "$filenames" = ".relationship.yml" ]
+        then
+            filenames=`ls $PROJECT_PATH/domain/description/`
+            event="MODIFY"
+        fi
 
+        for filename in $filenames
+        do
             entity_name=${filename%.*}
 
             ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php migrate:reset
 
             rm -rf $PROJECT_PATH/view/$entity_name
-            rm -rf $PROJECT_PATH/domain/dao/$entity_name.php
-            rm -rf $PROJECT_PATH/domain/entity/$entity_name.php
+            #rm -rf $PROJECT_PATH/domain/dao/$entity_name.php
+            #rm -rf $PROJECT_PATH/domain/entity/$entity_name.php
             rm -rf $PROJECT_PATH/command/migration/*_$entity_name.sql
             rm -rf $PROJECT_PATH/controller/$entity_name.php
 
@@ -61,11 +68,16 @@ then
             if [ "$event" = "DELETE" ];then
                 echo $filename $event
 
+                rm -rf $PROJECT_PATH/domain/dao/$entity_name.php
+                rm -rf $PROJECT_PATH/domain/entity/$entity_name.php
+
                 /bin/bash $PROJECT_PATH/project/tool/classmap.sh $PROJECT_PATH/domain
                 ENV=$env /usr/bin/php $PROJECT_PATH/public/cli.php migrate
             fi
 
-            rm -rf $LOCK_FILE
+        done
+
+        rm -rf $LOCK_FILE
         ) &
     fi
 fi
