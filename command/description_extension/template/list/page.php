@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{ $entity_name::$entity_display_name }}</title>
+  <title>{{ $entity_info['display_name'] }}</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -15,13 +15,13 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">{{ $entity_name::$entity_description }}</div>
+          <div class="layui-card-header">{{ $entity_info['description'] }}</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="{{ $entity_name }}-table" lay-filter="{{ $entity_name }}-table"></table>
 
             <script type="text/html" id="{{ $entity_name }}-table-toolbar">
               <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm" lay-event="add">添加{{ $entity_name::$entity_display_name }}</button>
+                <button class="layui-btn layui-btn-sm" lay-event="add">添加{{ $entity_info['display_name'] }}</button>
               </div>
             </script>
 
@@ -46,14 +46,38 @@ $table_render_infos = [
     ],
 ];
 
-$table_render_infos = array_merge($table_render_infos, array_build($entity_name::$struct_types, function ($struct, $type) use ($entity_name) {
+$table_render_infos = array_merge($table_render_infos, array_build($entity_info['structs'], function ($struct_name, $struct) use ($entity_name) {
     return [null, [
-        'field' => $struct,
-        'title' => array_key_exists($struct, $entity_name::$struct_display_names)? $entity_name::$struct_display_names[$struct]: $struct,
+        'field' => $struct_name,
+        'title' => $struct['display_name'],
         'sort' => true,
-        'align' => ($type === 'number'?'right': 'center'),
+        'align' => ($struct['data_type'] === 'number'?'right': 'center'),
     ]];
 }));
+
+
+foreach ($relationship_infos['relationships'] as $attribute_name => $relationship) {
+
+    if ($relationship['relationship_type'] === 'belongs_to') {
+
+        $table_render_infos[] = [
+            'field' => $attribute_name.'_display',
+            'title' => $relationship['entity_display_name'],
+            'sort' => true,
+        ];
+
+        foreach ($relationship['snaps'] as $structs) {
+            foreach ($structs as $struct_name => $struct) {
+                $table_render_infos[] = [
+                    'field' => $struct_name,
+                    'title' => $struct['display_name'],
+                    'sort' => true,
+                    'align' => ($struct['data_type'] === 'number'?'right': 'center'),
+                ];
+            }
+        }
+    }
+}
 
 $table_render_infos[] = [
     'field' => 'create_time',

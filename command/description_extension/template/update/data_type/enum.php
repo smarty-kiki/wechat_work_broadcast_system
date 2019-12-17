@@ -1,16 +1,16 @@
-@if (count($entity_name::$struct_formats[$struct]) > 6)
+@if (count($entity_name::struct_formaters($struct_name)) > 6)
 
-<select name="{{ $struct }}" lay-verify="required" lay-filter="aihao">
+<select name="{{ $struct_name }}" lay-verify="required" lay-filter="aihao">
   <option value=""></option>
-@foreach ($entity_name::$struct_formats[$struct] as $key => $value)
-  <option value="{{ $key }}" ^^{^^{ '{{ $key }}' === ${{ $entity_name }}->{{$struct}}?'selected':'' ^^}^^}>{{ $value }}</option>
+@foreach ($entity_name::struct_formaters($struct_name) as $key => $value)
+  <option value="{{ $key }}" ^^{^^{ '{{ $key }}' === ${{ $entity_name }}->{{ $struct_name }}?'selected':'' ^^}^^}>{{ $value }}</option>
 @endforeach
 </select>
 
 @else
 
-@foreach ($entity_name::$struct_formats[$struct] as $key => $value)
-  <input type="radio" name="{{ $struct }}" value="{{ $key }}" title="{{ $value }}" ^^{^^{ '{{ $key }}' === ${{ $entity_name }}->{{$struct}}?'checked':'' ^^}^^}>
+@foreach ($entity_name::struct_formaters($struct_name) as $key => $value)
+  <input type="radio" name="{{ $struct_name }}" value="{{ $key }}" title="{{ $value }}" ^^{^^{ '{{ $key }}' === ${{ $entity_name }}->{{ $struct_name }}?'checked':'' ^^}^^}>
 @endforeach
 
 @endif

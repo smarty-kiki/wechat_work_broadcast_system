@@ -1,16 +1,16 @@
-@if (count($entity_name::$struct_formats[$struct]) > 6)
+@if (count($entity_name::struct_formaters($struct_name)) > 6)
 
-<select name="{{ $struct }}" lay-verify="required" lay-filter="aihao" lay-search>
+<select name="{{ $struct_name }}" lay-verify="required" lay-filter="aihao" lay-search>
   <option value=""></option>
-@foreach ($entity_name::$struct_formats[$struct] as $key => $value)
+@foreach ($entity_name::struct_formaters[$struct_name] as $key => $value)
   <option value="{{ $key }}">{{ $value }}</option>
 @endforeach
 </select>
 
 @else
 
-@foreach ($entity_name::$struct_formats[$struct] as $key => $value)
-<input type="radio" name="{{ $struct }}" value="{{ $key }}" title="{{ $value }}">
+@foreach ($entity_name::struct_formaters($struct_name) as $key => $value)
+<input type="radio" name="{{ $struct_name }}" value="{{ $key }}" title="{{ $value }}">
 @endforeach
 
 @endif

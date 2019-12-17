@@ -1,1 +1,1 @@
-<input type="text" name="{{ $struct }}" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+<input type="text" name="{{ $struct_name }}" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
