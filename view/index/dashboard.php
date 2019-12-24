@@ -33,7 +33,7 @@
                 <th>主体分类</th>
                 <th>主体名</th>
                 <th>关键词</th>
-                <th>语义分类</th>
+                <th>关键词分类</th>
               </tr>
             </thead>
             <tbody>
