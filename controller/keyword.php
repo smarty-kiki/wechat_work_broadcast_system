@@ -8,9 +8,9 @@ if_get('/keywords', function ()
 if_get('/keywords/ajax', function ()
 {/*{{{*/
     list(
-        $inputs['name'], $inputs['category_id']
+        $inputs['name'], $inputs['keyword_category_id']
     ) = input_list(
-        'name', 'category_id'
+        'name', 'keyword_category_id'
     );
     $inputs = array_filter($inputs, 'not_null');
 
@@ -26,7 +26,7 @@ if_get('/keywords/ajax', function ()
                 [
                     'id' => $keyword->id,
                     'name' => $keyword->name,
-                    'category_display' => $keyword->category->display_for_keywords_category(),
+                    'keyword_category_display' => $keyword->keyword_category->display_for_keywords_keyword_category(),
                     'create_time' => $keyword->create_time,
                     'update_time' => $keyword->update_time,
                 ]
@@ -38,14 +38,14 @@ if_get('/keywords/ajax', function ()
 if_get('/keywords/add', function ()
 {/*{{{*/
     return render('keyword/add', [
-        'categories' => dao('category')->find_all(),
+        'keyword_categories' => dao('keyword_category')->find_all(),
     ]);
 });/*}}}*/
 
 if_post('/keywords/add', function ()
 {/*{{{*/
     $keyword = keyword::create(
-        input_entity('category', null, 'category_id'),
+        input_entity('keyword_category', null, 'keyword_category_id'),
         input('name')
     );
 
@@ -61,7 +61,7 @@ if_get('/keywords/update/*', function ($keyword_id)
 
     return render('keyword/update', [
         'keyword' => $keyword,
-        'categories' => dao('category')->find_all(),
+        'keyword_categories' => dao('keyword_category')->find_all(),
     ]);
 });/*}}}*/
 
@@ -70,7 +70,7 @@ if_post('/keywords/update/*', function ($keyword_id)
     $keyword = dao('keyword')->find($keyword_id);
     otherwise($keyword->is_not_null(), 'keyword not found');
 
-    $keyword->category = input_entity('category', null, 'category_id');
+    $keyword->keyword_category = input_entity('keyword_category', null, 'keyword_category_id');
     $keyword->name = input('name');
 
     return redirect('/keywords');

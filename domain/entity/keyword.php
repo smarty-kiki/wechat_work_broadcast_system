@@ -4,7 +4,7 @@ class keyword extends entity
 {
     /* generated code start */
     public $structs = [
-        'category_id' => 0,
+        'keyword_category_id' => 0,
         'name' => '',
     ];
 
@@ -12,30 +12,30 @@ class keyword extends entity
     public static $entity_description = '关键词';
 
     public static $struct_data_types = [
-        'category_id' => 'number',
+        'keyword_category_id' => 'number',
         'name' => 'string',
     ];
 
     public static $struct_display_names = [
-        'category_id' => '语义分类ID',
+        'keyword_category_id' => '关键词分类ID',
         'name' => '名称',
     ];
 
     public static $struct_descriptions = [
-        'category_id' => '语义分类ID',
+        'keyword_category_id' => '关键词分类ID',
         'name' => '名称',
     ];
 
     public function __construct()
     {/*{{{*/
-        $this->belongs_to('category');
+        $this->belongs_to('keyword_category');
     }/*}}}*/
 
-    public static function create(category $category, $name)
+    public static function create(keyword_category $keyword_category, $name)
     {/*{{{*/
         $keyword = parent::init();
 
-        $keyword->category = $category;
+        $keyword->keyword_category = $keyword_category;
         $keyword->name = $name;
 
         return $keyword;
@@ -57,12 +57,12 @@ class keyword extends entity
         return $formaters[$property] ?? false;
     }/*}}}*/
 
-    public function belongs_to_category(category $category)
+    public function belongs_to_keyword_category(keyword_category $keyword_category)
     {/*{{{*/
-        return $this->category_id == $category->id;
+        return $this->keyword_category_id == $keyword_category->id;
     }/*}}}*/
 
-    public function display_for_category_keywords()
+    public function display_for_keyword_category_keywords()
     {/*{{{*/
         return $this->id;
     }/*}}}*/

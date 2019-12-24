@@ -30,6 +30,7 @@
           <table id="test_result" class="layui-table">
             <thead>
               <tr>
+                <th>主体分类</th>
                 <th>主体名</th>
                 <th>关键词</th>
                 <th>语义分类</th>
@@ -76,7 +77,7 @@
               tbody.find('tr').remove();
               for(i = 0; i < res.data.length; i++) {
                   var obj = res.data[i];
-                  tbody.append($('<tr> <td>'+ obj.subject +'</td> <td>'+ obj.keyword +'</td> <td>'+ obj.category +'</td> </tr>'))
+                  tbody.append($('<tr> <td>'+ obj.subject_category +'</td> <td>'+ obj.subject +'</td> <td>'+ obj.keyword +'</td> <td>'+ obj.category +'</td> </tr>'))
               }
           } else {
               console.log(res.msg);

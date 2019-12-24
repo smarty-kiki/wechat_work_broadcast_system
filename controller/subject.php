@@ -8,9 +8,9 @@ if_get('/subjects', function ()
 if_get('/subjects/ajax', function ()
 {/*{{{*/
     list(
-        $inputs['name']
+        $inputs['name'], $inputs['subject_category_id']
     ) = input_list(
-        'name'
+        'name', 'subject_category_id'
     );
     $inputs = array_filter($inputs, 'not_null');
 
@@ -26,6 +26,7 @@ if_get('/subjects/ajax', function ()
                 [
                     'id' => $subject->id,
                     'name' => $subject->name,
+                    'subject_category_display' => $subject->subject_category->display_for_subjects_subject_category(),
                     'create_time' => $subject->create_time,
                     'update_time' => $subject->update_time,
                 ]
@@ -37,12 +38,14 @@ if_get('/subjects/ajax', function ()
 if_get('/subjects/add', function ()
 {/*{{{*/
     return render('subject/add', [
+        'subject_categories' => dao('subject_category')->find_all(),
     ]);
 });/*}}}*/
 
 if_post('/subjects/add', function ()
 {/*{{{*/
     $subject = subject::create(
+        input_entity('subject_category', null, 'subject_category_id'),
         input('name')
     );
 
@@ -58,6 +61,7 @@ if_get('/subjects/update/*', function ($subject_id)
 
     return render('subject/update', [
         'subject' => $subject,
+        'subject_categories' => dao('subject_category')->find_all(),
     ]);
 });/*}}}*/
 
@@ -66,6 +70,7 @@ if_post('/subjects/update/*', function ($subject_id)
     $subject = dao('subject')->find($subject_id);
     otherwise($subject->is_not_null(), 'subject not found');
 
+    $subject->subject_category = input_entity('subject_category', null, 'subject_category_id');
     $subject->name = input('name');
 
     return redirect('/subjects');

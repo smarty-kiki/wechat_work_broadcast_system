@@ -13,26 +13,78 @@
   association_type: aggregation
 
 - from:
-    entity: category
-    to_attribute_name: parent_category
-    to_display: "($this->parent_category_id ? $this->parent_category->display_for_categories_parent_category().'-':'').$this->name"
+    entity: keyword_category
+    to_attribute_name: parent_keyword_category
+    to_display: "($this->parent_keyword_category_id ? $this->parent_keyword_category->display_for_keyword_categories_parent_keyword_category().'-':'').$this->name"
     to_snaps: []
   to:
-    entity: category
-    from_attribute_name: categories
+    entity: keyword_category
+    from_attribute_name: keyword_categories
     from_display: "$this->name"
     from_snaps: []
   relationship_type: has_many
   association_type: aggregation
 
 - from:
-    entity: category
-    to_attribute_name: category
-    to_display: "($this->parent_category_id ? $this->parent_category->display_for_categories_parent_category().'-':'').$this->name"
+    entity: keyword_category
+    to_attribute_name: keyword_category
+    to_display: "($this->parent_keyword_category_id ? $this->parent_keyword_category->display_for_keywords_keyword_category().'-':'').$this->name"
     to_snaps: []
   to:
     entity: keyword
     from_attribute_name: keywords
+    from_display: "$this->id"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: composition
+
+- from:
+    entity: subject_category
+    to_attribute_name: parent_subject_category
+    to_display: "($this->parent_subject_category_id ? $this->parent_subject_category->display_for_subject_categories_parent_subject_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: subject_category
+    from_attribute_name: subject_categories
+    from_display: "$this->name"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: aggregation
+
+- from:
+    entity: subject_category
+    to_attribute_name: subject_category
+    to_display: "($this->parent_subject_category_id ? $this->parent_subject_category->display_for_subjects_subject_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: subject
+    from_attribute_name: subjects
+    from_display: "$this->name"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: composition
+
+- from:
+    entity: subject_category
+    to_attribute_name: subject_category
+    to_display: "($this->parent_subject_category_id ? $this->parent_subject_category->display_for_subject_keyword_links_subject_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: subject_keyword_link
+    from_attribute_name: subject_keyword_links
+    from_display: "$this->id"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: composition
+
+- from:
+    entity: keyword_category
+    to_attribute_name: keyword_category
+    to_display: "($this->parent_keyword_category_id ? $this->parent_keyword_category->display_for_subject_keyword_links_keyword_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: subject_keyword_link
+    from_attribute_name: subject_keyword_links
     from_display: "$this->id"
     from_snaps: []
   relationship_type: has_many

@@ -1,0 +1,6 @@
+---
+display_name: 主体分类
+structs:
+  name:
+    type: name
+...

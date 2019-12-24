@@ -20,11 +20,11 @@
             <form class="layui-form" action="" method="POST" lay-filter="component-form-element">
               <div class="layui-row layui-col-space10 layui-form-item">
                 <div class="layui-col-lg6">
-                  <label class="layui-form-label">语义分类：</label>
+                  <label class="layui-form-label">关键词分类：</label>
                   <div class="layui-input-block">
-                    <select name="category_id" lay-verify="required" lay-filter="aihao" lay-search>
-@foreach ($categories as $id => $category)
-                        <option value='{{ $id }}'>{{ $category->display_for_keywords_category() }}</option>
+                    <select name="keyword_category_id" lay-verify="required" lay-filter="aihao" lay-search>
+@foreach ($keyword_categories as $id => $keyword_category)
+                        <option value='{{ $id }}'>{{ $keyword_category->display_for_keywords_keyword_category() }}</option>
 @endforeach
                     </select>
                   </div>

@@ -1,5 +1,5 @@
 ---
-display_name: 语义分类
+display_name: 关键词分类
 structs:
   name:
     type: name

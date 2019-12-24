@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>主体名[{{ $subject->id }}]修改</title>
+  <title>主体分类[{{ $subject_category->id }}]修改</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -22,9 +22,10 @@
                 <div class="layui-col-lg6">
                   <label class="layui-form-label">主体分类：</label>
                   <div class="layui-input-block">
-                    <select name="subject_category_id" lay-verify="required" lay-filter="aihao" lay-search>
-@foreach ($subject_categories as $id => $subject_category)
-                        <option value='{{ $id }}' {{ $id  === $subject->subject_category_id?'selected':'' }}>{{ $subject_category->display_for_subjects_subject_category() }}</option>
+                    <select name="parent_subject_category_id" lay-verify="required" lay-filter="aihao" lay-search>
+                        <option value='0'>无</option>
+@foreach ($parent_subject_categories as $id => $parent_subject_category)
+                        <option value='{{ $id }}' {{ $id  === $subject_category->parent_subject_category_id?'selected':'' }}>{{ $parent_subject_category->display_for_subject_categories_parent_subject_category() }}</option>
 @endforeach
                     </select>
                   </div>
@@ -34,7 +35,7 @@
                 <div class="layui-col-lg6">
                   <label class="layui-form-label">名称：</label>
                   <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $subject->name }}'>
+                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $subject_category->name }}'>
                   </div>
                 </div>
               </div>

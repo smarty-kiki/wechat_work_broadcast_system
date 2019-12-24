@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>语义分类[{{ $category->id }}]修改</title>
+  <title>关键词分类[{{ $keyword_category->id }}]修改</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -20,12 +20,12 @@
             <form class="layui-form" action="" method="POST" lay-filter="component-form-element">
               <div class="layui-row layui-col-space10 layui-form-item">
                 <div class="layui-col-lg6">
-                  <label class="layui-form-label">语义分类：</label>
+                  <label class="layui-form-label">关键词分类：</label>
                   <div class="layui-input-block">
-                    <select name="parent_category_id" lay-verify="required" lay-filter="aihao" lay-search>
+                    <select name="parent_keyword_category_id" lay-verify="required" lay-filter="aihao" lay-search>
                         <option value='0'>无</option>
-@foreach ($parent_categories as $id => $parent_category)
-                        <option value='{{ $id }}' {{ $id  === $category->parent_category_id?'selected':'' }}>{{ $parent_category->display_for_categories_parent_category() }}</option>
+@foreach ($parent_keyword_categories as $id => $parent_keyword_category)
+                        <option value='{{ $id }}' {{ $id  === $keyword_category->parent_keyword_category_id?'selected':'' }}>{{ $parent_keyword_category->display_for_keyword_categories_parent_keyword_category() }}</option>
 @endforeach
                     </select>
                   </div>
@@ -35,7 +35,7 @@
                 <div class="layui-col-lg6">
                   <label class="layui-form-label">名称：</label>
                   <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $category->name }}'>
+                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $keyword_category->name }}'>
                   </div>
                 </div>
               </div>
