@@ -212,7 +212,7 @@ command('seed:data-init', '数据初始化', function ()
 
                     if ($parent_category instanceof category) {
 
-                        $category->parent_category = $parent_category;
+                        $category->parent_category_id = $parent_category->id;
                     }
 
                     $recursive_create_category_and_keyword($value, $category);
