@@ -4,7 +4,7 @@ class category extends entity
 {
     /* generated code start */
     public $structs = [
-        'parent_category_id' => '',
+        'parent_category_id' => 0,
         'name' => '',
     ];
 

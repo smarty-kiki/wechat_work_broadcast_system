@@ -4,7 +4,7 @@ class keyword extends entity
 {
     /* generated code start */
     public $structs = [
-        'category_id' => '',
+        'category_id' => 0,
         'name' => '',
     ];
 

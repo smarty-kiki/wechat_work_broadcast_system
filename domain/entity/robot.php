@@ -4,7 +4,7 @@ class robot extends entity
 {
     /* generated code start */
     public $structs = [
-        'application_id' => '',
+        'application_id' => 0,
         'name' => '',
         'description' => '',
         'webhook_url' => '',

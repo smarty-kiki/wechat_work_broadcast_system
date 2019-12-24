@@ -57,12 +57,12 @@ if_not_found(function () {
 });
 
 // init controller
-include CONTROLLER_DIR.'/test.php';
 include CONTROLLER_DIR.'/robot.php';
 include CONTROLLER_DIR.'/keyword.php';
 include CONTROLLER_DIR.'/fruit.php';
 include CONTROLLER_DIR.'/category.php';
 include CONTROLLER_DIR.'/application.php';
+include CONTROLLER_DIR.'/test.php';
 include CONTROLLER_DIR.'/index.php';
 
 // fix
