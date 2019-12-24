@@ -1,6 +1,6 @@
 <?php
 
-function recursive_create_category_and_keyword($category_infos, $parent_category = null) {
+function recursive_create_category_and_keyword($category_infos, $parent_category = null) {/*{{{*/
 
     foreach ($category_infos as $key => $value) {
 
@@ -19,7 +19,7 @@ function recursive_create_category_and_keyword($category_infos, $parent_category
             recursive_create_category_and_keyword($value, $category);
         }
     }
-};
+};/*}}}*/
 
 command('seed:data-init', '数据初始化', function ()
 {/*{{{*/
@@ -48,6 +48,7 @@ command('seed:data-init', '数据初始化', function ()
             '柚子',
             '苹果',
             '石榴',
+            '草莓',
             '梨',
             '香蕉',
             '葡萄',
@@ -125,12 +126,14 @@ command('seed:data-init', '数据初始化', function ()
             '内部变质' => [
                 '内部变质' => [
                     '长虫' => [
+                        '长虫',
                     ],
                 ],
             ],
             '运营问题' => [
                 '价格' => [
                     '价格贵' => [
+                        '贵',
                     ],
                 ],
             ],
@@ -138,14 +141,20 @@ command('seed:data-init', '数据初始化', function ()
             '鲜度' => [
                 '果损' => [
                     '碰伤、压伤' => [
+                        '破',
+                        '黑',
+                        '压',
                     ],
                 ],
             ],
             '果型' => [
                 '果型' => [
                     '过大过小' => [
+                        '太小',
+                        '有点小',
                     ],
                     '皮厚肉少' => [
+                        '肉少',
                     ],
                 ],
             ],
@@ -158,69 +167,66 @@ command('seed:data-init', '数据初始化', function ()
             '鲜度' => [
                 '过熟' => [
                     '过熟' => [
+                        '过熟',
                     ],
                 ],
                 '过期' => [
                     '过期' => [
+                        '过期',
                     ],
                 ],
                 '腐烂' => [
                     '腐烂' => [
+                        '腐烂',
                     ],
                 ],
                 '失水' => [
                     '失水' => [
+                        '皱',
+                        '干了',
+                        '缩水',
                     ],
                 ],
                 '变色' => [
                     '变色' => [
+                        '变色',
+                        '颜色不对',
                     ],
                 ],
                 '变味' => [
                     '变味' => [
+                        '臭',
+                        '变味',
                     ],
                 ],
                 '发霉' => [
                     '发霉' => [
+                        '发霉',
+                        '长霉',
+                        '长毛',
+                        '白毛',
                     ],
                 ],
             ],
             '口感' => [
                 '口感' => [
                     '发涩' => [
+                        '涩',
                     ],
                     '不甜' => [
+                        '不甜',
+                        '没味',
                     ],
                     '酸' => [
+                        '酸',
                     ],
                     '苦' => [
+                        '苦',
                     ],
                 ],
             ],
         ];/*}}}*/
 
-        $recursive_create_category_and_keyword = function ($category_infos, $parent_category = null) {
-
-            foreach ($category_infos as $key => $value) {
-
-                if (is_numeric($key)) {
-
-                    keyword::create($parent_category, $value);
-                } else {
-                    
-                    $category = category::create($key);
-
-                    if ($parent_category instanceof category) {
-
-                        $category->parent_category_id = $parent_category->id;
-                    }
-
-                    $recursive_create_category_and_keyword($value, $category);
-                }
-            }
-        };
-
         recursive_create_category_and_keyword($category_infos);
-
     });
 });/*}}}*/
