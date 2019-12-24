@@ -76,7 +76,7 @@
               tbody.find('tr').remove();
               for(i = 0; i < res.data.length; i++) {
                   var obj = res.data[i];
-                  tbody.append($('<tr> <td>'+ obj.fruit +'</td> <td>'+ obj.keyword +'</td> <td>'+ obj.category +'</td> </tr>'))
+                  tbody.append($('<tr> <td>'+ obj.subject +'</td> <td>'+ obj.keyword +'</td> <td>'+ obj.category +'</td> </tr>'))
               }
           } else {
               console.log(res.msg);

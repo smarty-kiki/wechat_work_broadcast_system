@@ -4,21 +4,21 @@ if_post('/ajax_test', function ()
 {
     $content = input('content');
 
-    $fruits = dao('fruit')->find_all();
+    $subjects = dao('subject')->find_all();
 
-    $matched_fruit_names = [];
+    $matched_subject_names = [];
 
-    foreach ($fruits as $fruit) {
+    foreach ($subjects as $subject) {
 
-        if (false !== mb_stristr($content, $fruit->name)) {
+        if (false !== mb_stristr($content, $subject->name)) {
 
-            $matched_fruit_names[] = $fruit->name;
+            $matched_subject_names[] = $subject->name;
         }
     }
 
     $matched_keywords = [];
 
-    if ($matched_fruit_names) {
+    if ($matched_subject_names) {
 
         $keywords = dao('keyword')->find_all();
 
@@ -32,10 +32,10 @@ if_post('/ajax_test', function ()
     }
 
     $res_infos = [];
-    foreach ($matched_fruit_names as $fruit_name) {
+    foreach ($matched_subject_names as $subject_name) {
         foreach ($matched_keywords as $keyword) {
             $res_infos[] = [
-                'fruit' => $fruit_name,
+                'subject' => $subject_name,
                 'keyword' => $keyword->name,
                 'category' => $keyword->category->display_for_keywords_category(),
             ];
