@@ -1,5 +1,5 @@
 ---
-display_name: 水果名
+display_name: 主体名
 structs:
   name:
     type: name

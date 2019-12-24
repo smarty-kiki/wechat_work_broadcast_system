@@ -1,5 +1,5 @@
 # up
-CREATE TABLE IF NOT EXISTS `fruit` (
+CREATE TABLE IF NOT EXISTS `subject` (
     `id` bigint(20) UNSIGNED NOT NULL,
     `version` int(11) NOT NULL,
     `create_time` datetime DEFAULT NULL,
@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `fruit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # down
-drop table `fruit`;
+drop table `subject`;

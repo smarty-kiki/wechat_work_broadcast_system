@@ -1,14 +1,14 @@
 <?php
 
-class fruit extends entity
+class subject extends entity
 {
     /* generated code start */
     public $structs = [
         'name' => '',
     ];
 
-    public static $entity_display_name = '水果名';
-    public static $entity_description = '水果名';
+    public static $entity_display_name = '主体名';
+    public static $entity_description = '主体名';
 
     public static $struct_data_types = [
         'name' => 'string',
@@ -28,11 +28,11 @@ class fruit extends entity
 
     public static function create($name)
     {/*{{{*/
-        $fruit = parent::init();
+        $subject = parent::init();
 
-        $fruit->name = $name;
+        $subject->name = $name;
 
-        return $fruit;
+        return $subject;
     }/*}}}*/
 
     public static function struct_formaters($property)

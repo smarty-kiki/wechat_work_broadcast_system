@@ -9,9 +9,9 @@ if_get('/', function ()
                 'key'  => 'module',
                 'icon_class' => 'layui-icon-component',
                 'children' => [
+                    [ 'name' => '主体名管理', 'key' => 'subject', 'href' => '/subjects', ],
                     //[ 'name' => '群机器人管理', 'key' => 'robot', 'href' => '/robots', ],
                     [ 'name' => '关键词管理', 'key' => 'keyword', 'href' => '/keywords', ],
-                    [ 'name' => '水果名管理', 'key' => 'fruit', 'href' => '/fruits', ],
                     [ 'name' => '语义分类管理', 'key' => 'category', 'href' => '/categories', ],
                     //[ 'name' => '应用管理', 'key' => 'application', 'href' => '/applications', ],
                 ],

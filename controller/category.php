@@ -25,8 +25,8 @@ if_get('/categories/ajax', function ()
                 null,
                 [
                     'id' => $category->id,
-                    'parent_category_display' => $category->parent_category->display_for_categories_parent_category(),
                     'name' => $category->name,
+                    'parent_category_display' => $category->parent_category->display_for_categories_parent_category(),
                     'create_time' => $category->create_time,
                     'update_time' => $category->update_time,
                 ]

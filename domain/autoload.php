@@ -7,12 +7,12 @@ spl_autoload_register(function ($class_name) {
         'keyword_dao' => 'dao/keyword.php',
         'category_dao' => 'dao/category.php',
         'robot_dao' => 'dao/robot.php',
-        'fruit_dao' => 'dao/fruit.php',
+        'subject_dao' => 'dao/subject.php',
         'application' => 'entity/application.php',
         'keyword' => 'entity/keyword.php',
         'category' => 'entity/category.php',
         'robot' => 'entity/robot.php',
-        'fruit' => 'entity/fruit.php',
+        'subject' => 'entity/subject.php',
     ];
 
     if (isset($class_maps[$class_name])) {

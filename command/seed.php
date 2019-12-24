@@ -25,10 +25,10 @@ command('seed:data-init', '数据初始化', function ()
 {/*{{{*/
     unit_of_work(function () {
 
-        $fruits = dao('fruit')->find_all();
-        foreach ($fruits as $fruit) {
-            $fruit->delete();
-            echo '删除 fruit '.$fruit->id."\n";
+        $subjects = dao('subject')->find_all();
+        foreach ($subjects as $subject) {
+            $subject->delete();
+            echo '删除 subject '.$subject->id."\n";
         }
 
         $categories = dao('category')->find_all();
@@ -43,7 +43,7 @@ command('seed:data-init', '数据初始化', function ()
             echo '删除 keyword '.$keyword->id."\n";
         }
 
-        $fruit_names = [/*{{{*/
+        $subject_names = [/*{{{*/
             '其它',
             '柚子',
             '苹果',
@@ -103,9 +103,9 @@ command('seed:data-init', '数据初始化', function ()
             '小苹果',
         ]; /*}}}*/
 
-        foreach ($fruit_names as $fruit_name) {
+        foreach ($subject_names as $subject_name) {
 
-            fruit::create($fruit_name);
+            subject::create($subject_name);
         }
 
         $category_infos = [/*{{{*/

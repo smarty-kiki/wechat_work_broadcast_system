@@ -28,13 +28,9 @@
         </div>
         <div class="layui-card-body">
           <table id="test_result" class="layui-table">
-            <colgroup>
-              <col width="150">
-              <col>
-            </colgroup>
             <thead>
               <tr>
-                <th>水果名</th>
+                <th>主体名</th>
                 <th>关键词</th>
                 <th>语义分类</th>
               </tr>
