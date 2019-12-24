@@ -1,5 +1,26 @@
 <?php
 
+function recursive_create_category_and_keyword($category_infos, $parent_category = null) {
+
+    foreach ($category_infos as $key => $value) {
+
+        if (is_numeric($key)) {
+
+            keyword::create($parent_category, $value);
+        } else {
+
+            $category = category::create($key);
+
+            if ($parent_category instanceof category) {
+
+                $category->parent_category = $parent_category;
+            }
+
+            recursive_create_category_and_keyword($value, $category);
+        }
+    }
+};
+
 command('seed:data-init', '数据初始化', function ()
 {/*{{{*/
     unit_of_work(function () {
@@ -199,7 +220,7 @@ command('seed:data-init', '数据初始化', function ()
             }
         };
 
-        $recursive_create_category_and_keyword($category_infos);
+        recursive_create_category_and_keyword($category_infos);
 
     });
 });/*}}}*/
