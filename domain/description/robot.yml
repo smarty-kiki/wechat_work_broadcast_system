@@ -1,0 +1,11 @@
+---
+display_name: 群机器人
+structs:
+  name:
+    type: name
+  description:
+    type: description
+  webhook_url:
+    type: url
+    display_name: Webhook地址
+...

@@ -1,2 +1,40 @@
 ---
+- from:
+    entity: application
+    to_attribute_name: application
+    to_display: "$this->name"
+    to_snaps: []
+  to:
+    entity: robot
+    from_attribute_name: robots
+    from_display: "$this->name"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: aggregation
+
+- from:
+    entity: category
+    to_attribute_name: parent_category
+    to_display: "($this->parent_category_id ? $this->parent_category->display_for_categories_parent_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: category
+    from_attribute_name: categories
+    from_display: "$this->name"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: aggregation
+
+- from:
+    entity: category
+    to_attribute_name: category
+    to_display: "($this->parent_category_id ? $this->parent_category->display_for_categories_parent_category().'-':'').$this->name"
+    to_snaps: []
+  to:
+    entity: keyword
+    from_attribute_name: keywords
+    from_display: "$this->id"
+    from_snaps: []
+  relationship_type: has_many
+  association_type: composition
 ...

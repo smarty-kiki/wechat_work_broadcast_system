@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{ $entity_info['display_name'] }}[^^{^^{ ${{ $entity_name }}->id ^^}^^}]修改</title>
+  <title>群机器人[{{ $robot->id }}]修改</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -18,35 +18,43 @@
           <div class="layui-card-header"></div>
           <div class="layui-card-body">
             <form class="layui-form" action="" method="POST" lay-filter="component-form-element">
-@foreach ($relationship_infos['relationships'] as $attribute_name => $relationship)
-@if ($relationship['relationship_type'] === 'belongs_to')
               <div class="layui-row layui-col-space10 layui-form-item">
                 <div class="layui-col-lg6">
-                  <label class="layui-form-label">{{ $relationship['entity_display_name'] }}：</label>
+                  <label class="layui-form-label">应用：</label>
                   <div class="layui-input-block">
-                    <select name="{{ $attribute_name }}_id" lay-verify="required" lay-filter="aihao" lay-search>
-@if ($relationship['association_type'] === 'aggregation')
+                    <select name="application_id" lay-verify="required" lay-filter="aihao" lay-search>
                         <option value='0'>无</option>
-@endif
-@^^foreach (${{ english_word_pluralize($attribute_name) }} as $id => ${{ $attribute_name }})
-                        <option value='^^{^^{ $id ^^}^^}' ^^{^^{ $id  === ${{ $entity_name }}->{{ $attribute_name }}_id?'selected':'' ^^}^^}>^^{^^{ ${{ $attribute_name }}->display_for_{{ $relationship['self_attribute_name'] }}_{{ $attribute_name }}() ^^}^^}</option>
-@^^endforeach
+@foreach ($applications as $id => $application)
+                        <option value='{{ $id }}' {{ $id  === $robot->application_id?'selected':'' }}>{{ $application->display_for_robots_application() }}</option>
+@endforeach
                     </select>
                   </div>
                 </div>
               </div>
-@endif
-@endforeach
-@foreach ($entity_info['structs'] as $struct_name => $struct)
               <div class="layui-row layui-col-space10 layui-form-item">
                 <div class="layui-col-lg6">
-                  <label class="layui-form-label">{{ $struct['display_name'] }}：</label>
+                  <label class="layui-form-label">名称：</label>
                   <div class="layui-input-block">
-                    {{ blade_eval(_generate_template_data_type_update($struct['data_type']), ['entity_name' => $entity_name, 'struct_name' => $struct_name, 'struct' => $struct]) }}
+                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $robot->name }}'>
                   </div>
                 </div>
               </div>
-@endforeach
+              <div class="layui-row layui-col-space10 layui-form-item">
+                <div class="layui-col-lg6">
+                  <label class="layui-form-label">描述：</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="description" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $robot->description }}'>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-row layui-col-space10 layui-form-item">
+                <div class="layui-col-lg6">
+                  <label class="layui-form-label">Webhook地址：</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="webhook_url" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value='{{ $robot->webhook_url }}'>
+                  </div>
+                </div>
+              </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
                   <a href='javascript:window.history.back(-1);' class="layui-btn layui-btn-danger">取消</a>

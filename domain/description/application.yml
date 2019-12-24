@@ -1,0 +1,18 @@
+---
+display_name: 应用
+structs: 
+  name:
+    type: name
+  agent_id:
+    type: id
+    display_name: AgentId
+  secret:
+    type: secret
+    display_name: Secret
+  token:
+    type: secret
+    display_name: Token
+  encoding_aes_key:
+    type: secret
+    display_name: EncodingAESKey
+...

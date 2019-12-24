@@ -1,0 +1,6 @@
+---
+display_name: 语义分类
+structs:
+  name:
+    type: name
+...
